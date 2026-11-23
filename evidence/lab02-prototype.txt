@@ -1,0 +1,36 @@
+$ node --test test/prototype.test.js
+{"method":"GET","path":"/equipment","processId":"823b6fa6-fec2-4f19-8b9b-1eed50782e57","initiator":null,"event":"http.request"}
+{"status":200,"durationMs":0.6961660000000052,"processId":"823b6fa6-fec2-4f19-8b9b-1eed50782e57","initiator":null,"event":"http.result"}
+{"method":"GET","path":"/equipment/1/slots","processId":"9825d09f-bcda-4196-a7e8-e3830d34dfbb","initiator":null,"event":"http.request"}
+{"status":200,"durationMs":0.3422089999999969,"processId":"9825d09f-bcda-4196-a7e8-e3830d34dfbb","initiator":null,"event":"http.result"}
+{"method":"POST","path":"/bookings","processId":"a85ae5ad-9910-4ab7-908b-8d1d22e8fb62","initiator":"student-a","event":"http.request"}
+{"bookingId":"1a3a5388-4441-4ef8-8c78-eee507740c7c","replay":false,"processId":"a85ae5ad-9910-4ab7-908b-8d1d22e8fb62","initiator":"student-a","event":"booking.created"}
+{"status":201,"durationMs":0.44608300000000156,"processId":"a85ae5ad-9910-4ab7-908b-8d1d22e8fb62","initiator":"student-a","event":"http.result"}
+{"method":"POST","path":"/bookings","processId":"7772b094-e14e-4f2c-8509-0bfb7fd0ecbc","initiator":"student-b","event":"http.request"}
+{"code":"slot_occupied","processId":"7772b094-e14e-4f2c-8509-0bfb7fd0ecbc","initiator":"student-b","event":"http.error"}
+{"status":409,"durationMs":0.2271250000000009,"processId":"7772b094-e14e-4f2c-8509-0bfb7fd0ecbc","initiator":"student-b","event":"http.result"}
+{"method":"POST","path":"/bookings","processId":"191a8417-7164-4498-857a-973cb10451c9","initiator":"student-a","event":"http.request"}
+{"bookingId":"1a3a5388-4441-4ef8-8c78-eee507740c7c","replay":true,"processId":"191a8417-7164-4498-857a-973cb10451c9","initiator":"student-a","event":"booking.created"}
+{"status":201,"durationMs":0.2133749999999992,"processId":"191a8417-7164-4498-857a-973cb10451c9","initiator":"student-a","event":"http.result"}
+{"method":"GET","path":"/bookings","processId":"b0c834ac-d797-43bd-ba5d-ce799b250d1a","initiator":"student-a","event":"http.request"}
+{"status":200,"durationMs":0.09291699999999992,"processId":"b0c834ac-d797-43bd-ba5d-ce799b250d1a","initiator":"student-a","event":"http.result"}
+{"method":"GET","path":"/equipment/1/slots","processId":"686b270a-4d2a-49d3-aa22-f8d87c9e7995","initiator":null,"event":"http.request"}
+{"status":200,"durationMs":0.10608299999999815,"processId":"686b270a-4d2a-49d3-aa22-f8d87c9e7995","initiator":null,"event":"http.result"}
+{"method":"POST","path":"/bookings/1a3a5388-4441-4ef8-8c78-eee507740c7c/cancel","processId":"9240fa5b-851a-49b2-8292-5337bf1844f9","initiator":"student-a","event":"http.request"}
+{"bookingId":"1a3a5388-4441-4ef8-8c78-eee507740c7c","processId":"9240fa5b-851a-49b2-8292-5337bf1844f9","initiator":"student-a","event":"booking.cancelled"}
+{"status":200,"durationMs":0.16404199999999491,"processId":"9240fa5b-851a-49b2-8292-5337bf1844f9","initiator":"student-a","event":"http.result"}
+{"method":"POST","path":"/bookings","processId":"47ce2617-4e17-48e6-a0aa-60395e3e3ca3","initiator":"student-a","event":"http.request"}
+{"bookingId":"1a3a5388-4441-4ef8-8c78-eee507740c7c","replay":true,"processId":"47ce2617-4e17-48e6-a0aa-60395e3e3ca3","initiator":"student-a","event":"booking.created"}
+{"status":201,"durationMs":0.12295899999999449,"processId":"47ce2617-4e17-48e6-a0aa-60395e3e3ca3","initiator":"student-a","event":"http.result"}
+{"method":"POST","path":"/bookings","processId":"0740c16a-c549-4bc7-8777-75a925dbd345","initiator":"student-a","event":"http.request"}
+{"bookingId":"85930c4f-a5f2-4520-af8b-cfa9b5a265a8","replay":false,"processId":"0740c16a-c549-4bc7-8777-75a925dbd345","initiator":"student-a","event":"booking.created"}
+{"status":201,"durationMs":0.13833300000000293,"processId":"0740c16a-c549-4bc7-8777-75a925dbd345","initiator":"student-a","event":"http.result"}
+✔ all five operations work through the memory prototype (20.799458ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 117.95725
