@@ -2,16 +2,12 @@ import assert from 'node:assert/strict';
 import { once } from 'node:events';
 import { createServer } from 'node:net';
 import { test } from 'node:test';
-import { migrate } from '../dist/maintenance/migrate.js';
-import { seedDemo } from '../dist/maintenance/seed.js';
 import { createPool } from '../dist/stores/postgres/pool.js';
+import { isolatedDatabase } from './support/database.js';
 import { createBooking, serve } from './support/http.js';
 
 test('PostgreSQL HTTP contract, transaction rollback, availability query, and correlated logs', async (t) => {
-  const pool = createPool();
-  t.after(() => pool.end());
-  await migrate(pool);
-  await seedDemo(pool, '2030-07-02');
+  const { pool } = await isolatedDatabase(t, '2030-07-02');
 
   const lines = [];
   const original = console.log;

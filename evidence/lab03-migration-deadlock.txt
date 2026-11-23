@@ -1,0 +1,95 @@
+$ make test
+npm run build
+
+> lab-equipment-booking@0.1.0 build
+> tsc -p tsconfig.json
+
+sh scripts/with-postgres.sh node --test test/health.test.js test/unit/*.test.js test/postgres-contract.test.js test/booking-race.test.js test/booking.e2e.test.js
+Applied schema/001-initial.sql
+✖ two independent sessions race for a slot and the database allows one active booking (2045.587542ms)
+Applied schema/001-initial.sql
+Applied indexes/bookings_one_active_idx.sql
+Applied indexes/bookings_owner_history_idx.sql
+✔ built API finds, creates, replays, cancels and rebooks a slot (2253.290875ms)
+{"method":"GET","path":"/health","processId":"596ef181-a1b1-4b62-aa29-9c02fe020f9b","initiator":null,"event":"http.request"}
+{"status":200,"durationMs":1.6032909999999987,"processId":"596ef181-a1b1-4b62-aa29-9c02fe020f9b","initiator":null,"event":"http.result"}
+✔ built server answers health over HTTP (16.571042ms)
+✖ PostgreSQL HTTP contract, transaction rollback, availability query, and correlated logs (1033.212958ms)
+{"method":"GET","path":"/equipment","processId":"64557da2-26f6-4142-bc02-b450544f6d29","initiator":null,"event":"http.request"}
+{"operation":"list_equipment","processId":"64557da2-26f6-4142-bc02-b450544f6d29","initiator":null,"event":"db.start"}
+{"operation":"list_equipment","durationMs":1.608541999999943,"code":"ECONNRESET","processId":"64557da2-26f6-4142-bc02-b450544f6d29","initiator":null,"event":"db.error"}
+{"code":"storage_unavailable","processId":"64557da2-26f6-4142-bc02-b450544f6d29","initiator":null,"event":"http.error"}
+{"status":503,"durationMs":4.504583000000139,"processId":"64557da2-26f6-4142-bc02-b450544f6d29","initiator":null,"event":"http.result"}
+✔ connection failure returns a correlated 503 (36.784625ms)
+✔ allows a future free slot (0.550375ms)
+✔ rejects a future occupied slot (0.047167ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 5
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2357.390083
+
+✖ failing tests:
+
+test at test/booking-race.test.js:7:1
+✖ two independent sessions race for a slot and the database allows one active booking (2045.587542ms)
+  error: deadlock detected
+      at node_modules/pg/lib/client.js:694:17
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async ensureIndex (dist/maintenance/migrate.js:28:5)
+      at async migrate (dist/maintenance/migrate.js:61:21)
+      at async isolatedDatabase (test/support/database.js:22:3)
+      at async TestContext.<anonymous> (test/booking-race.test.js:8:26)
+      at async Test.run (node:internal/test_runner/test:1127:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {
+    length: 294,
+    severity: 'ERROR',
+    code: '40P01',
+    detail: 'Process 76 waits for ShareLock on virtual transaction 6/3; blocked by process 78.\nProcess 78 waits for ExclusiveLock on advisory lock [16384,0,18429780,1]; blocked by process 76.',
+    hint: 'See server log for query details.',
+    position: undefined,
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'deadlock.c',
+    line: '1130',
+    routine: 'DeadLockReport'
+  }
+
+test at test/postgres-contract.test.js:9:1
+✖ PostgreSQL HTTP contract, transaction rollback, availability query, and correlated logs (1033.212958ms)
+  error: deadlock detected
+      at node_modules/pg/lib/client.js:694:17
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async migrate (dist/maintenance/migrate.js:42:9)
+      at async isolatedDatabase (test/support/database.js:22:3)
+      at async TestContext.<anonymous> (test/postgres-contract.test.js:10:20)
+      at async Test.run (node:internal/test_runner/test:1127:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {
+    length: 294,
+    severity: 'ERROR',
+    code: '40P01',
+    detail: 'Process 77 waits for ExclusiveLock on advisory lock [16384,0,18429780,1]; blocked by process 76.\nProcess 76 waits for ShareLock on virtual transaction 5/3; blocked by process 77.',
+    hint: 'See server log for query details.',
+    position: undefined,
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'deadlock.c',
+    line: '1130',
+    routine: 'DeadLockReport'
+  }
+make: *** [test] Error 1

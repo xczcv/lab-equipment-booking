@@ -1,0 +1,46 @@
+$ make mutation
+npx --no-install stryker run
+21:16:54 (32064) INFO ProjectReader Found 1 of 64 file(s) to be mutated.
+21:16:54 (32064) INFO Instrumenter Instrumented 1 source file(s) with 13 mutant(s)
+21:16:54 (32064) INFO ConcurrencyTokenProvider Creating 2 test runner process(es).
+21:16:54 (32064) INFO DryRunExecutor Starting initial test run (command test runner with "off" coverage analysis). This may take a while.
+21:16:55 (32064) INFO DryRunExecutor Initial test run succeeded. Ran 1 tests in 0 seconds (net 115 ms, overhead 0 ms).
+
+All tests
+  ✓ All tests (killed 8)
+
+[Survived] ConditionalExpression
+src/domain/slot-policy.js:2:7
+-     if (slot === null) return 'slot_not_found';
++     if (false) return 'slot_not_found';
+
+[Survived] StringLiteral
+src/domain/slot-policy.js:2:29
+-     if (slot === null) return 'slot_not_found';
++     if (slot === null) return "";
+
+[Survived] ConditionalExpression
+src/domain/slot-policy.js:3:7
+-     if (slot.startsAt <= now) return 'slot_started';
++     if (false) return 'slot_started';
+
+[Survived] EqualityOperator
+src/domain/slot-policy.js:3:7
+-     if (slot.startsAt <= now) return 'slot_started';
++     if (slot.startsAt < now) return 'slot_started';
+
+[Survived] StringLiteral
+src/domain/slot-policy.js:3:36
+-     if (slot.startsAt <= now) return 'slot_started';
++     if (slot.startsAt <= now) return "";
+
+Ran 1.00 tests per mutant on average.
+----------------|------------------|----------|-----------|------------|----------|----------|
+                | % Mutation score |          |           |            |          |          |
+File            |  total | covered | # killed | # timeout | # survived | # no cov | # errors |
+----------------|--------|---------|----------|-----------|------------|----------|----------|
+All files       |  61.54 |   61.54 |        8 |         0 |          5 |        0 |        0 |
+ slot-policy.js |  61.54 |   61.54 |        8 |         0 |          5 |        0 |        0 |
+----------------|--------|---------|----------|-----------|------------|----------|----------|
+21:16:55 (32064) INFO JsonReporter Your report can be found at: reports/mutation/mutation.json
+21:16:55 (32064) INFO MutationTestExecutor Done in 1 second.

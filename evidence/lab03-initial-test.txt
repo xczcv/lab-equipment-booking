@@ -1,0 +1,104 @@
+$ make test
+npm run build
+
+> lab-equipment-booking@0.1.0 build
+> tsc -p tsconfig.json
+
+sh scripts/with-postgres.sh node --test test/health.test.js test/unit/*.test.js test/postgres-contract.test.js test/booking-race.test.js test/booking.e2e.test.js
+Applied schema/001-initial.sql
+Applied indexes/bookings_one_active_idx.sql
+Applied indexes/bookings_owner_history_idx.sql
+{"method":"POST","path":"/bookings","processId":"b3dfa3a3-8b6f-4da7-a5db-68a31f04f505","initiator":"student-a","event":"http.request"}
+{"operation":"find_student","processId":"b3dfa3a3-8b6f-4da7-a5db-68a31f04f505","initiator":"student-a","event":"db.start"}
+{"method":"POST","path":"/bookings","processId":"8f4d7c29-36f7-485b-af0d-74f9a43dfdcd","initiator":"student-b","event":"http.request"}
+{"operation":"find_student","processId":"8f4d7c29-36f7-485b-af0d-74f9a43dfdcd","initiator":"student-b","event":"db.start"}
+{"operation":"find_student","durationMs":3.3350829999999974,"rowCount":1,"processId":"b3dfa3a3-8b6f-4da7-a5db-68a31f04f505","initiator":"student-a","event":"db.result"}
+{"operation":"connect","processId":"b3dfa3a3-8b6f-4da7-a5db-68a31f04f505","initiator":"student-a","event":"db.start"}
+{"operation":"connect","durationMs":0.04770900000002598,"processId":"b3dfa3a3-8b6f-4da7-a5db-68a31f04f505","initiator":"student-a","event":"db.result"}
+{"operation":"begin","processId":"b3dfa3a3-8b6f-4da7-a5db-68a31f04f505","initiator":"student-a","event":"db.start"}
+{"operation":"find_student","durationMs":3.0757499999999993,"rowCount":1,"processId":"8f4d7c29-36f7-485b-af0d-74f9a43dfdcd","initiator":"student-b","event":"db.result"}
+{"operation":"connect","processId":"8f4d7c29-36f7-485b-af0d-74f9a43dfdcd","initiator":"student-b","event":"db.start"}
+{"operation":"connect","durationMs":0.03483399999998937,"processId":"8f4d7c29-36f7-485b-af0d-74f9a43dfdcd","initiator":"student-b","event":"db.result"}
+{"operation":"begin","processId":"8f4d7c29-36f7-485b-af0d-74f9a43dfdcd","initiator":"student-b","event":"db.start"}
+{"operation":"begin","durationMs":0.34295900000000756,"rowCount":null,"processId":"b3dfa3a3-8b6f-4da7-a5db-68a31f04f505","initiator":"student-a","event":"db.result"}
+{"operation":"claim_receipt","processId":"b3dfa3a3-8b6f-4da7-a5db-68a31f04f505","initiator":"student-a","event":"db.start"}
+{"operation":"begin","durationMs":0.3010420000000238,"rowCount":null,"processId":"8f4d7c29-36f7-485b-af0d-74f9a43dfdcd","initiator":"student-b","event":"db.result"}
+{"operation":"claim_receipt","processId":"8f4d7c29-36f7-485b-af0d-74f9a43dfdcd","initiator":"student-b","event":"db.start"}
+{"operation":"claim_receipt","durationMs":0.5202089999999941,"rowCount":1,"processId":"b3dfa3a3-8b6f-4da7-a5db-68a31f04f505","initiator":"student-a","event":"db.result"}
+{"operation":"lock_slot","processId":"b3dfa3a3-8b6f-4da7-a5db-68a31f04f505","initiator":"student-a","event":"db.start"}
+{"operation":"claim_receipt","durationMs":0.5802500000000066,"rowCount":1,"processId":"8f4d7c29-36f7-485b-af0d-74f9a43dfdcd","initiator":"student-b","event":"db.result"}
+{"operation":"lock_slot","processId":"8f4d7c29-36f7-485b-af0d-74f9a43dfdcd","initiator":"student-b","event":"db.start"}
+{"operation":"lock_slot","durationMs":25.09775000000002,"rowCount":1,"processId":"8f4d7c29-36f7-485b-af0d-74f9a43dfdcd","initiator":"student-b","event":"db.result"}
+{"operation":"active_on_slot","processId":"8f4d7c29-36f7-485b-af0d-74f9a43dfdcd","initiator":"student-b","event":"db.start"}
+{"operation":"active_on_slot","durationMs":0.7837920000000054,"rowCount":0,"processId":"8f4d7c29-36f7-485b-af0d-74f9a43dfdcd","initiator":"student-b","event":"db.result"}
+{"operation":"insert_booking","processId":"8f4d7c29-36f7-485b-af0d-74f9a43dfdcd","initiator":"student-b","event":"db.start"}
+{"operation":"insert_booking","durationMs":1.5917920000000265,"rowCount":1,"processId":"8f4d7c29-36f7-485b-af0d-74f9a43dfdcd","initiator":"student-b","event":"db.result"}
+{"operation":"save_receipt","processId":"8f4d7c29-36f7-485b-af0d-74f9a43dfdcd","initiator":"student-b","event":"db.start"}
+{"operation":"save_receipt","durationMs":0.5864589999999907,"rowCount":1,"processId":"8f4d7c29-36f7-485b-af0d-74f9a43dfdcd","initiator":"student-b","event":"db.result"}
+{"operation":"commit","processId":"8f4d7c29-36f7-485b-af0d-74f9a43dfdcd","initiator":"student-b","event":"db.start"}
+{"operation":"commit","durationMs":0.44779200000002106,"rowCount":null,"processId":"8f4d7c29-36f7-485b-af0d-74f9a43dfdcd","initiator":"student-b","event":"db.result"}
+{"operation":"release","evicted":false,"processId":"8f4d7c29-36f7-485b-af0d-74f9a43dfdcd","initiator":"student-b","event":"db.result"}
+{"bookingId":"19880af3-0305-4b90-adca-fc44e8acb0ce","replay":false,"processId":"8f4d7c29-36f7-485b-af0d-74f9a43dfdcd","initiator":"student-b","event":"booking.created"}
+{"status":201,"durationMs":33.42416700000001,"processId":"8f4d7c29-36f7-485b-af0d-74f9a43dfdcd","initiator":"student-b","event":"http.result"}
+{"operation":"lock_slot","durationMs":29.46591600000002,"rowCount":1,"processId":"b3dfa3a3-8b6f-4da7-a5db-68a31f04f505","initiator":"student-a","event":"db.result"}
+{"operation":"active_on_slot","processId":"b3dfa3a3-8b6f-4da7-a5db-68a31f04f505","initiator":"student-a","event":"db.start"}
+{"operation":"active_on_slot","durationMs":2.4084159999999883,"rowCount":1,"processId":"b3dfa3a3-8b6f-4da7-a5db-68a31f04f505","initiator":"student-a","event":"db.result"}
+{"operation":"rollback","processId":"b3dfa3a3-8b6f-4da7-a5db-68a31f04f505","initiator":"student-a","event":"db.start"}
+{"operation":"rollback","durationMs":0.3930000000000007,"rowCount":null,"processId":"b3dfa3a3-8b6f-4da7-a5db-68a31f04f505","initiator":"student-a","event":"db.result"}
+{"operation":"release","evicted":false,"processId":"b3dfa3a3-8b6f-4da7-a5db-68a31f04f505","initiator":"student-a","event":"db.result"}
+{"code":"slot_occupied","processId":"b3dfa3a3-8b6f-4da7-a5db-68a31f04f505","initiator":"student-a","event":"http.error"}
+{"status":409,"durationMs":37.38174999999998,"processId":"b3dfa3a3-8b6f-4da7-a5db-68a31f04f505","initiator":"student-a","event":"http.result"}
+✔ two independent sessions race for a slot and the database allows one active booking (105.202875ms)
+Applied schema/001-initial.sql
+Applied indexes/bookings_one_active_idx.sql
+Applied indexes/bookings_owner_history_idx.sql
+✔ built API finds, creates, replays, cancels and rebooks a slot (281.052042ms)
+{"method":"GET","path":"/health","processId":"5703fe18-10fb-442c-b550-33cfc202ccb8","initiator":null,"event":"http.request"}
+{"status":200,"durationMs":1.5538749999999908,"processId":"5703fe18-10fb-442c-b550-33cfc202ccb8","initiator":null,"event":"http.result"}
+✔ built server answers health over HTTP (15.014125ms)
+Applied schema/001-initial.sql
+Applied indexes/bookings_one_active_idx.sql
+Applied indexes/bookings_owner_history_idx.sql
+{"method":"GET","path":"/equipment/1/slots","processId":"bf6a909d-3a1d-4dff-9ecd-1b41f43f657d","initiator":"student-a","event":"http.request"}
+{"operation":"available_slots","processId":"bf6a909d-3a1d-4dff-9ecd-1b41f43f657d","initiator":"student-a","event":"db.start"}
+{"operation":"available_slots","durationMs":0.6076249999999845,"rowCount":3,"processId":"bf6a909d-3a1d-4dff-9ecd-1b41f43f657d","initiator":"student-a","event":"db.result"}
+{"status":200,"durationMs":0.7192920000000242,"processId":"bf6a909d-3a1d-4dff-9ecd-1b41f43f657d","initiator":"student-a","event":"http.result"}
+{"method":"POST","path":"/bookings","processId":"a2d136f6-502e-4449-a4b4-cfc91e0d80d2","initiator":"student-a","event":"http.request"}
+{"operation":"find_student","processId":"a2d136f6-502e-4449-a4b4-cfc91e0d80d2","initiator":"student-a","event":"db.start"}
+{"operation":"find_student","durationMs":0.4060839999999928,"rowCount":1,"processId":"a2d136f6-502e-4449-a4b4-cfc91e0d80d2","initiator":"student-a","event":"db.result"}
+{"operation":"connect","processId":"a2d136f6-502e-4449-a4b4-cfc91e0d80d2","initiator":"student-a","event":"db.start"}
+{"operation":"connect","durationMs":0.01229200000000219,"processId":"a2d136f6-502e-4449-a4b4-cfc91e0d80d2","initiator":"student-a","event":"db.result"}
+{"operation":"begin","processId":"a2d136f6-502e-4449-a4b4-cfc91e0d80d2","initiator":"student-a","event":"db.start"}
+{"operation":"begin","durationMs":0.26616599999999835,"rowCount":null,"processId":"a2d136f6-502e-4449-a4b4-cfc91e0d80d2","initiator":"student-a","event":"db.result"}
+{"operation":"claim_receipt","processId":"a2d136f6-502e-4449-a4b4-cfc91e0d80d2","initiator":"student-a","event":"db.start"}
+{"operation":"claim_receipt","durationMs":0.3369160000000022,"rowCount":1,"processId":"a2d136f6-502e-4449-a4b4-cfc91e0d80d2","initiator":"student-a","event":"db.result"}
+{"operation":"lock_slot","processId":"a2d136f6-502e-4449-a4b4-cfc91e0d80d2","initiator":"student-a","event":"db.start"}
+{"operation":"lock_slot","durationMs":0.3125419999999792,"rowCount":1,"processId":"a2d136f6-502e-4449-a4b4-cfc91e0d80d2","initiator":"student-a","event":"db.result"}
+{"operation":"active_on_slot","processId":"a2d136f6-502e-4449-a4b4-cfc91e0d80d2","initiator":"student-a","event":"db.start"}
+{"operation":"active_on_slot","durationMs":0.27429200000000264,"rowCount":0,"processId":"a2d136f6-502e-4449-a4b4-cfc91e0d80d2","initiator":"student-a","event":"db.result"}
+{"operation":"insert_booking","processId":"a2d136f6-502e-4449-a4b4-cfc91e0d80d2","initiator":"student-a","event":"db.start"}
+{"operation":"insert_booking","durationMs":0.4669580000000053,"rowCount":1,"processId":"a2d136f6-502e-4449-a4b4-cfc91e0d80d2","initiator":"student-a","event":"db.result"}
+{"operation":"save_receipt","processId":"a2d136f6-502e-4449-a4b4-cfc91e0d80d2","initiator":"student-a","event":"db.start"}
+{"operation":"save_receipt","durationMs":0.5360839999999882,"code":"P0001","processId":"a2d136f6-502e-4449-a4b4-cfc91e0d80d2","initiator":"student-a","event":"db.error"}
+{"operation":"rollback","processId":"a2d136f6-502e-4449-a4b4-cfc91e0d80d2","initiator":"student-a","event":"db.start"}
+{"operation":"rollback","durationMs":0.2909170000000074,"rowCount":null,"processId":"a2d136f6-502e-4449-a4b4-cfc91e0d80d2","initiator":"student-a","event":"db.result"}
+{"operation":"release","evicted":false,"processId":"a2d136f6-502e-4449-a4b4-cfc91e0d80d2","initiator":"student-a","event":"db.result"}
+{"code":"internal_error","processId":"a2d136f6-502e-4449-a4b4-cfc91e0d80d2","initiator":"student-a","event":"http.error"}
+{"status":500,"durationMs":3.210250000000002,"processId":"a2d136f6-502e-4449-a4b4-cfc91e0d80d2","initiator":"student-a","event":"http.result"}
+✔ PostgreSQL HTTP contract, transaction rollback, availability query, and correlated logs (163.673042ms)
+{"method":"GET","path":"/equipment","processId":"55de4c16-bd9d-4a44-90cb-9017d53e976a","initiator":null,"event":"http.request"}
+{"operation":"list_equipment","processId":"55de4c16-bd9d-4a44-90cb-9017d53e976a","initiator":null,"event":"db.start"}
+{"operation":"list_equipment","durationMs":0.49220900000000256,"code":"ECONNRESET","processId":"55de4c16-bd9d-4a44-90cb-9017d53e976a","initiator":null,"event":"db.error"}
+{"code":"storage_unavailable","processId":"55de4c16-bd9d-4a44-90cb-9017d53e976a","initiator":null,"event":"http.error"}
+{"status":503,"durationMs":0.5906669999999963,"processId":"55de4c16-bd9d-4a44-90cb-9017d53e976a","initiator":null,"event":"http.result"}
+✔ connection failure returns a correlated 503 (4.812917ms)
+✔ allows a future free slot (0.513833ms)
+✔ rejects a future occupied slot (0.046708ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 376.620458

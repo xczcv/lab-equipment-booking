@@ -1,0 +1,10 @@
+{
+  "$schema": "./node_modules/@stryker-mutator/core/schema/stryker-schema.json",
+  "mutate": ["src/domain/slot-policy.js"],
+  "testRunner": "command",
+  "commandRunner": { "command": "node --test test/unit/slot-policy.test.js" },
+  "coverageAnalysis": "off",
+  "concurrency": 2,
+  "reporters": ["clear-text", "json"],
+  "jsonReporter": { "fileName": "reports/mutation/mutation.json" }
+}

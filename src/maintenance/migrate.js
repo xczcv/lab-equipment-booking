@@ -1,4 +1,5 @@
 import { readFile, readdir } from 'node:fs/promises';
+import { setTimeout } from 'node:timers/promises';
 import { fileURLToPath } from 'node:url';
 import { createPool } from '../stores/postgres/pool.js';
 
@@ -35,6 +36,20 @@ async function ensureIndex(client, version, name, sql) {
   ]);
 }
 
+async function acquireMigrationLock(client) {
+  const deadline = performance.now() + 5_000;
+  do {
+    // A waiting SELECT pg_advisory_lock holds a snapshot that CREATE INDEX CONCURRENTLY may need.
+    const { rows } = await client.query(
+      'SELECT pg_try_advisory_lock($1) AS acquired',
+      [lockId],
+    );
+    if (rows[0].acquired) return;
+    await setTimeout(50);
+  } while (performance.now() < deadline);
+  throw new Error('Another migration session still holds the lock');
+}
+
 export async function migrate(pool, phase = 'all') {
   if (!['all', 'schema', 'indexes'].includes(phase))
     throw new Error('Unknown migration phase');
@@ -42,7 +57,7 @@ export async function migrate(pool, phase = 'all') {
   // Destroy this dedicated session on release so failures cannot leave the advisory lock held.
   try {
     await client.query("SET lock_timeout = '5s'");
-    await client.query('SELECT pg_advisory_lock($1)', [lockId]);
+    await acquireMigrationLock(client);
     await client.query(
       'CREATE TABLE IF NOT EXISTS app_migrations (version text PRIMARY KEY)',
     );
