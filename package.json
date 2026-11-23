@@ -1,0 +1,26 @@
+{
+  "name": "lab-equipment-booking",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/main.js",
+    "dev": "node src/main.js",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint .",
+    "test:smoke": "node --test test/health.test.js",
+    "check": "npm run format:check && npm run lint && npm run build && npm run test:smoke"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.0.1",
+    "globals": "^17.0.0",
+    "prettier": "^3.8.1",
+    "typescript": "~5.9.3"
+  }
+}

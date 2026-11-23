@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.env
+.local/
+.stryker-tmp/
+coverage/
+reports/mutation/

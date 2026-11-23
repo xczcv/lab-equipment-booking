@@ -1,0 +1,16 @@
+ЛР1. Навмисний негативний тест pre-commit
+8b3db1cba2d7a5d40fb82b41ed78dd380e2f3479
+$ git commit -m "test: deliberate hook failure"
+
+> lab-equipment-booking@0.1.0 check
+> npm run format:check && npm run lint && npm run build && npm run test:smoke
+
+
+> lab-equipment-booking@0.1.0 format:check
+> prettier --check .
+
+Checking formatting...
+[warn] test/hook-negative.js
+[warn] Code style issues found in the above file. Run Prettier with --write to fix.
+exit=1
+8b3db1cba2d7a5d40fb82b41ed78dd380e2f3479

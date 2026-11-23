@@ -1,0 +1,6 @@
+package-lock.json
+**/dist/
+.local/
+.stryker-tmp/
+coverage/
+reports/
