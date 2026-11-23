@@ -1,0 +1,45 @@
+$ sh scripts/with-postgres.sh node --test test/postgres-contract.test.js
+Applied schema/001-initial.sql
+Applied indexes/bookings_one_active_idx.sql
+Applied indexes/bookings_owner_history_idx.sql
+{"method":"GET","path":"/equipment/1/slots","processId":"c53b8b9b-d174-40be-a294-8e648681e442","initiator":"student-a","event":"http.request"}
+{"operation":"available_slots","processId":"c53b8b9b-d174-40be-a294-8e648681e442","initiator":"student-a","event":"db.start"}
+{"operation":"available_slots","durationMs":0.6059169999999767,"rowCount":3,"processId":"c53b8b9b-d174-40be-a294-8e648681e442","initiator":"student-a","event":"db.result"}
+{"status":200,"durationMs":0.7052500000000066,"processId":"c53b8b9b-d174-40be-a294-8e648681e442","initiator":"student-a","event":"http.result"}
+{"method":"POST","path":"/bookings","processId":"97c3433d-91e1-43af-bca9-2bf4c44fb5cf","initiator":"student-a","event":"http.request"}
+{"operation":"find_student","processId":"97c3433d-91e1-43af-bca9-2bf4c44fb5cf","initiator":"student-a","event":"db.start"}
+{"operation":"find_student","durationMs":0.4277500000000032,"rowCount":1,"processId":"97c3433d-91e1-43af-bca9-2bf4c44fb5cf","initiator":"student-a","event":"db.result"}
+{"operation":"connect","processId":"97c3433d-91e1-43af-bca9-2bf4c44fb5cf","initiator":"student-a","event":"db.start"}
+{"operation":"connect","durationMs":0.012208000000015318,"processId":"97c3433d-91e1-43af-bca9-2bf4c44fb5cf","initiator":"student-a","event":"db.result"}
+{"operation":"begin","processId":"97c3433d-91e1-43af-bca9-2bf4c44fb5cf","initiator":"student-a","event":"db.start"}
+{"operation":"begin","durationMs":0.2492080000000101,"rowCount":null,"processId":"97c3433d-91e1-43af-bca9-2bf4c44fb5cf","initiator":"student-a","event":"db.result"}
+{"operation":"claim_receipt","processId":"97c3433d-91e1-43af-bca9-2bf4c44fb5cf","initiator":"student-a","event":"db.start"}
+{"operation":"claim_receipt","durationMs":0.357167000000004,"rowCount":1,"processId":"97c3433d-91e1-43af-bca9-2bf4c44fb5cf","initiator":"student-a","event":"db.result"}
+{"operation":"lock_slot","processId":"97c3433d-91e1-43af-bca9-2bf4c44fb5cf","initiator":"student-a","event":"db.start"}
+{"operation":"lock_slot","durationMs":0.2842500000000143,"rowCount":1,"processId":"97c3433d-91e1-43af-bca9-2bf4c44fb5cf","initiator":"student-a","event":"db.result"}
+{"operation":"active_on_slot","processId":"97c3433d-91e1-43af-bca9-2bf4c44fb5cf","initiator":"student-a","event":"db.start"}
+{"operation":"active_on_slot","durationMs":0.26379200000002356,"rowCount":0,"processId":"97c3433d-91e1-43af-bca9-2bf4c44fb5cf","initiator":"student-a","event":"db.result"}
+{"operation":"insert_booking","processId":"97c3433d-91e1-43af-bca9-2bf4c44fb5cf","initiator":"student-a","event":"db.start"}
+{"operation":"insert_booking","durationMs":0.4904170000000079,"rowCount":1,"processId":"97c3433d-91e1-43af-bca9-2bf4c44fb5cf","initiator":"student-a","event":"db.result"}
+{"operation":"save_receipt","processId":"97c3433d-91e1-43af-bca9-2bf4c44fb5cf","initiator":"student-a","event":"db.start"}
+{"operation":"save_receipt","durationMs":0.5154579999999953,"code":"P0001","processId":"97c3433d-91e1-43af-bca9-2bf4c44fb5cf","initiator":"student-a","event":"db.error"}
+{"operation":"rollback","processId":"97c3433d-91e1-43af-bca9-2bf4c44fb5cf","initiator":"student-a","event":"db.start"}
+{"operation":"rollback","durationMs":0.23775000000000546,"rowCount":null,"processId":"97c3433d-91e1-43af-bca9-2bf4c44fb5cf","initiator":"student-a","event":"db.result"}
+{"operation":"release","evicted":false,"processId":"97c3433d-91e1-43af-bca9-2bf4c44fb5cf","initiator":"student-a","event":"db.result"}
+{"code":"internal_error","processId":"97c3433d-91e1-43af-bca9-2bf4c44fb5cf","initiator":"student-a","event":"http.error"}
+{"status":500,"durationMs":3.142291,"processId":"97c3433d-91e1-43af-bca9-2bf4c44fb5cf","initiator":"student-a","event":"http.result"}
+✔ PostgreSQL HTTP contract, transaction rollback, availability query, and correlated logs (81.187292ms)
+{"method":"GET","path":"/equipment","processId":"1781a27e-0914-4570-a88e-493a987255a7","initiator":null,"event":"http.request"}
+{"operation":"list_equipment","processId":"1781a27e-0914-4570-a88e-493a987255a7","initiator":null,"event":"db.start"}
+{"operation":"list_equipment","durationMs":0.4577500000000043,"code":"ECONNRESET","processId":"1781a27e-0914-4570-a88e-493a987255a7","initiator":null,"event":"db.error"}
+{"code":"storage_unavailable","processId":"1781a27e-0914-4570-a88e-493a987255a7","initiator":null,"event":"http.error"}
+{"status":503,"durationMs":0.5370000000000061,"processId":"1781a27e-0914-4570-a88e-493a987255a7","initiator":null,"event":"http.result"}
+✔ connection failure returns a correlated 503 (4.146458ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 178.94575

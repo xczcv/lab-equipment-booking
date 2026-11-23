@@ -9,7 +9,8 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "start": "node dist/main.js",
-    "dev": "node src/main.js",
+    "db:migrate": "node src/maintenance/migrate.js",
+    "db:seed": "node src/maintenance/seed.js",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint .",
@@ -22,5 +23,8 @@
     "globals": "^17.0.0",
     "prettier": "^3.8.1",
     "typescript": "~5.9.3"
+  },
+  "dependencies": {
+    "pg": "^8.23.1"
   }
 }
