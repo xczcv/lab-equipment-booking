@@ -1,0 +1,406 @@
+{
+  "sha": "fa665562d8355eacaead8375815a278a7c2c5b68",
+  "mode": "load",
+  "startedAt": "2026-11-23T19:27:54.180Z",
+  "fixture": {
+    "equipment": 48,
+    "days": 60,
+    "slotsPerDay": 32,
+    "firstDate": "2099-07-01"
+  },
+  "workload": {
+    "concurrency": 12,
+    "browseRequests": 1800,
+    "bookingBatches": 100,
+    "warmupBrowse": 120,
+    "warmupBatches": 8
+  },
+  "host": {
+    "platform": "darwin",
+    "release": "27.0.0",
+    "arch": "arm64",
+    "cpu": "Apple M5 Pro",
+    "parallelism": 15,
+    "node": "v25.7.0"
+  },
+  "rounds": [
+    {
+      "round": 1,
+      "dataset": {
+        "slots": 92160,
+        "activeBookings": 17664,
+        "postgres": "17.11"
+      },
+      "scenarios": {
+        "browse": {
+          "requests": 1800,
+          "status": {
+            "200": 1800
+          },
+          "latencyMs": {
+            "p50": 1.49,
+            "p95": 2.424,
+            "p99": 3.103
+          },
+          "serverMs": {
+            "p50": 0.951,
+            "p95": 1.692,
+            "p99": 2.344
+          },
+          "dbMs": {
+            "p50": 0.908,
+            "p95": 1.647,
+            "p99": 2.31
+          },
+          "dbByOperationMs": {
+            "available_slots": {
+              "p50": 0.908,
+              "p95": 1.647,
+              "p99": 2.31
+            }
+          },
+          "elapsedMs": 240.432,
+          "cpuMs": 277.951,
+          "cpuPercentOfOneCore": 115.605,
+          "peakRssMiB": 91.281,
+          "finalHeapMiB": 10.8,
+          "loopActiveMs": 223.613,
+          "loopIdleMs": 16.805
+        },
+        "reserve": {
+          "requests": 1200,
+          "status": {
+            "201": 100,
+            "409": 1100
+          },
+          "latencyMs": {
+            "p50": 7.741,
+            "p95": 10.997,
+            "p99": 12.385
+          },
+          "serverMs": {
+            "p50": 7.22,
+            "p95": 10.369,
+            "p99": 11.753
+          },
+          "dbMs": {
+            "p50": 7.143,
+            "p95": 10.29,
+            "p99": 11.694
+          },
+          "dbByOperationMs": {
+            "find_student": {
+              "p50": 0.526,
+              "p95": 1.235,
+              "p99": 1.705
+            },
+            "connect": {
+              "p50": 0.057,
+              "p95": 3.511,
+              "p99": 4.292
+            },
+            "begin": {
+              "p50": 0.431,
+              "p95": 1.268,
+              "p99": 1.495
+            },
+            "claim_receipt": {
+              "p50": 0.457,
+              "p95": 1.322,
+              "p99": 1.685
+            },
+            "lock_slot": {
+              "p50": 4.269,
+              "p95": 6.684,
+              "p99": 7.791
+            },
+            "active_on_slot": {
+              "p50": 0.237,
+              "p95": 0.719,
+              "p99": 1.236
+            },
+            "rollback": {
+              "p50": 0.221,
+              "p95": 0.437,
+              "p99": 1.145
+            },
+            "insert_booking": {
+              "p50": 0.308,
+              "p95": 1.126,
+              "p99": 1.316
+            },
+            "save_receipt": {
+              "p50": 0.263,
+              "p95": 0.361,
+              "p99": 0.773
+            },
+            "commit": {
+              "p50": 0.394,
+              "p95": 0.462,
+              "p99": 0.974
+            }
+          },
+          "elapsedMs": 1093.897,
+          "cpuMs": 382.036,
+          "cpuPercentOfOneCore": 34.924,
+          "peakRssMiB": 103.453,
+          "finalHeapMiB": 17.656,
+          "loopActiveMs": 343.359,
+          "loopIdleMs": 750.517
+        }
+      }
+    },
+    {
+      "round": 2,
+      "dataset": {
+        "slots": 92160,
+        "activeBookings": 17664,
+        "postgres": "17.11"
+      },
+      "scenarios": {
+        "browse": {
+          "requests": 1800,
+          "status": {
+            "200": 1800
+          },
+          "latencyMs": {
+            "p50": 1.489,
+            "p95": 2.176,
+            "p99": 3.099
+          },
+          "serverMs": {
+            "p50": 0.976,
+            "p95": 1.527,
+            "p99": 1.889
+          },
+          "dbMs": {
+            "p50": 0.934,
+            "p95": 1.479,
+            "p99": 1.853
+          },
+          "dbByOperationMs": {
+            "available_slots": {
+              "p50": 0.934,
+              "p95": 1.479,
+              "p99": 1.853
+            }
+          },
+          "elapsedMs": 236.537,
+          "cpuMs": 275.932,
+          "cpuPercentOfOneCore": 116.655,
+          "peakRssMiB": 92.531,
+          "finalHeapMiB": 10.633,
+          "loopActiveMs": 221.172,
+          "loopIdleMs": 15.347
+        },
+        "reserve": {
+          "requests": 1200,
+          "status": {
+            "201": 100,
+            "409": 1100
+          },
+          "latencyMs": {
+            "p50": 7.926,
+            "p95": 11.802,
+            "p99": 14.216
+          },
+          "serverMs": {
+            "p50": 7.359,
+            "p95": 11.065,
+            "p99": 13.54
+          },
+          "dbMs": {
+            "p50": 7.267,
+            "p95": 10.942,
+            "p99": 13.429
+          },
+          "dbByOperationMs": {
+            "find_student": {
+              "p50": 0.558,
+              "p95": 1.299,
+              "p99": 1.685
+            },
+            "connect": {
+              "p50": 0.056,
+              "p95": 3.484,
+              "p99": 4.59
+            },
+            "begin": {
+              "p50": 0.443,
+              "p95": 1.234,
+              "p99": 1.601
+            },
+            "claim_receipt": {
+              "p50": 0.481,
+              "p95": 1.206,
+              "p99": 1.734
+            },
+            "lock_slot": {
+              "p50": 4.376,
+              "p95": 7.116,
+              "p99": 8.587
+            },
+            "active_on_slot": {
+              "p50": 0.243,
+              "p95": 0.73,
+              "p99": 1.274
+            },
+            "rollback": {
+              "p50": 0.219,
+              "p95": 0.365,
+              "p99": 1.117
+            },
+            "insert_booking": {
+              "p50": 0.321,
+              "p95": 1.052,
+              "p99": 1.32
+            },
+            "save_receipt": {
+              "p50": 0.262,
+              "p95": 0.479,
+              "p99": 0.717
+            },
+            "commit": {
+              "p50": 0.398,
+              "p95": 0.589,
+              "p99": 0.663
+            }
+          },
+          "elapsedMs": 1125.158,
+          "cpuMs": 409.335,
+          "cpuPercentOfOneCore": 36.38,
+          "peakRssMiB": 103.156,
+          "finalHeapMiB": 17.775,
+          "loopActiveMs": 370.446,
+          "loopIdleMs": 754.699
+        }
+      }
+    },
+    {
+      "round": 3,
+      "dataset": {
+        "slots": 92160,
+        "activeBookings": 17664,
+        "postgres": "17.11"
+      },
+      "scenarios": {
+        "browse": {
+          "requests": 1800,
+          "status": {
+            "200": 1800
+          },
+          "latencyMs": {
+            "p50": 1.886,
+            "p95": 3.457,
+            "p99": 5.331
+          },
+          "serverMs": {
+            "p50": 1.209,
+            "p95": 2.069,
+            "p99": 3.224
+          },
+          "dbMs": {
+            "p50": 1.152,
+            "p95": 2.01,
+            "p99": 3.147
+          },
+          "dbByOperationMs": {
+            "available_slots": {
+              "p50": 1.152,
+              "p95": 2.01,
+              "p99": 3.147
+            }
+          },
+          "elapsedMs": 311.495,
+          "cpuMs": 344.737,
+          "cpuPercentOfOneCore": 110.672,
+          "peakRssMiB": 92.047,
+          "finalHeapMiB": 12.475,
+          "loopActiveMs": 293.718,
+          "loopIdleMs": 17.752
+        },
+        "reserve": {
+          "requests": 1200,
+          "status": {
+            "201": 100,
+            "409": 1100
+          },
+          "latencyMs": {
+            "p50": 8.928,
+            "p95": 14.63,
+            "p99": 17.807
+          },
+          "serverMs": {
+            "p50": 8.228,
+            "p95": 13.62,
+            "p99": 16.64
+          },
+          "dbMs": {
+            "p50": 8.132,
+            "p95": 13.5,
+            "p99": 16.508
+          },
+          "dbByOperationMs": {
+            "find_student": {
+              "p50": 0.64,
+              "p95": 1.418,
+              "p99": 1.931
+            },
+            "connect": {
+              "p50": 0.077,
+              "p95": 4.079,
+              "p99": 5.847
+            },
+            "begin": {
+              "p50": 0.493,
+              "p95": 1.397,
+              "p99": 1.672
+            },
+            "claim_receipt": {
+              "p50": 0.549,
+              "p95": 1.331,
+              "p99": 1.819
+            },
+            "lock_slot": {
+              "p50": 4.891,
+              "p95": 9.089,
+              "p99": 11.289
+            },
+            "active_on_slot": {
+              "p50": 0.265,
+              "p95": 0.879,
+              "p99": 1.396
+            },
+            "insert_booking": {
+              "p50": 0.343,
+              "p95": 1.076,
+              "p99": 1.844
+            },
+            "save_receipt": {
+              "p50": 0.273,
+              "p95": 0.46,
+              "p99": 1.059
+            },
+            "commit": {
+              "p50": 0.451,
+              "p95": 0.876,
+              "p99": 1.598
+            },
+            "rollback": {
+              "p50": 0.22,
+              "p95": 0.517,
+              "p99": 1.154
+            }
+          },
+          "elapsedMs": 1286.567,
+          "cpuMs": 492.113,
+          "cpuPercentOfOneCore": 38.25,
+          "peakRssMiB": 103.344,
+          "finalHeapMiB": 20.809,
+          "loopActiveMs": 460.734,
+          "loopIdleMs": 825.815
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,262 @@
+{
+  "sha": "41a056c8a40fb99a3038b520d0d1930c20502c88",
+  "mode": "profile",
+  "startedAt": "2026-11-23T19:30:40.145Z",
+  "fixture": {
+    "equipment": 48,
+    "days": 60,
+    "slotsPerDay": 32,
+    "firstDate": "2099-07-01"
+  },
+  "workload": {
+    "concurrency": 12,
+    "browseRequests": 1800,
+    "bookingBatches": 100,
+    "warmupBrowse": 120,
+    "warmupBatches": 8
+  },
+  "host": {
+    "platform": "darwin",
+    "release": "27.0.0",
+    "arch": "arm64",
+    "cpu": "Apple M5 Pro",
+    "parallelism": 15,
+    "node": "v25.7.0"
+  },
+  "rounds": [
+    {
+      "round": 1,
+      "dataset": {
+        "slots": 92160,
+        "activeBookings": 17664,
+        "postgres": "17.11"
+      },
+      "scenarios": {
+        "browse": {
+          "requests": 1800,
+          "status": {
+            "200": 1800
+          },
+          "latencyMs": {
+            "p50": 2.122,
+            "p95": 3.345,
+            "p99": 4.578
+          },
+          "serverMs": {
+            "p50": 1.296,
+            "p95": 2.061,
+            "p99": 2.695
+          },
+          "dbMs": {
+            "p50": 1.227,
+            "p95": 1.984,
+            "p99": 2.641
+          },
+          "dbByOperationMs": {
+            "available_slots": {
+              "p50": 1.227,
+              "p95": 1.984,
+              "p99": 2.641
+            }
+          },
+          "elapsedMs": 340.685,
+          "cpuMs": 391.468,
+          "cpuPercentOfOneCore": 114.906,
+          "peakRssMiB": 91.234,
+          "finalHeapMiB": 14.002,
+          "loopActiveMs": 334.872,
+          "loopIdleMs": 5.788,
+          "profile": {
+            "samples": 285,
+            "idlePercent": 12.093,
+            "topActiveFrames": [
+              {
+                "frame": "(anonymous) · dist/stores/postgres/store.js",
+                "ms": 32.454
+              },
+              {
+                "frame": "consoleCall",
+                "ms": 29.266
+              },
+              {
+                "frame": "writev",
+                "ms": 24.02
+              },
+              {
+                "frame": "parseDate · node_modules/postgres-date/index.js",
+                "ms": 16.793
+              },
+              {
+                "frame": "post · node:inspector",
+                "ms": 15.872
+              },
+              {
+                "frame": "(garbage collector)",
+                "ms": 9.896
+              },
+              {
+                "frame": "writeUtf8String",
+                "ms": 9.771
+              },
+              {
+                "frame": "(program)",
+                "ms": 8.571
+              },
+              {
+                "frame": "nextTick · node:internal/process/task_queues",
+                "ms": 8.316
+              },
+              {
+                "frame": "log · dist/context.js",
+                "ms": 5.813
+              },
+              {
+                "frame": "(anonymous) · node_modules/pg-pool/index.js",
+                "ms": 5.032
+              },
+              {
+                "frame": "writeOrBuffer · node:internal/streams/writable",
+                "ms": 4.749
+              }
+            ]
+          }
+        },
+        "reserve": {
+          "requests": 1200,
+          "status": {
+            "201": 100,
+            "409": 1100
+          },
+          "latencyMs": {
+            "p50": 9.694,
+            "p95": 14.865,
+            "p99": 17.795
+          },
+          "serverMs": {
+            "p50": 8.934,
+            "p95": 13.708,
+            "p99": 16.695
+          },
+          "dbMs": {
+            "p50": 8.774,
+            "p95": 13.469,
+            "p99": 16.46
+          },
+          "dbByOperationMs": {
+            "find_student": {
+              "p50": 0.81,
+              "p95": 1.616,
+              "p99": 2.2
+            },
+            "connect": {
+              "p50": 0.096,
+              "p95": 4.226,
+              "p99": 5
+            },
+            "begin": {
+              "p50": 0.576,
+              "p95": 1.312,
+              "p99": 1.617
+            },
+            "claim_receipt": {
+              "p50": 0.596,
+              "p95": 1.265,
+              "p99": 1.582
+            },
+            "lock_slot": {
+              "p50": 5.266,
+              "p95": 9.017,
+              "p99": 11.41
+            },
+            "active_on_slot": {
+              "p50": 0.268,
+              "p95": 0.81,
+              "p99": 1.26
+            },
+            "rollback": {
+              "p50": 0.225,
+              "p95": 0.583,
+              "p99": 1.141
+            },
+            "insert_booking": {
+              "p50": 0.404,
+              "p95": 1.253,
+              "p99": 1.464
+            },
+            "save_receipt": {
+              "p50": 0.278,
+              "p95": 0.582,
+              "p99": 1.144
+            },
+            "commit": {
+              "p50": 0.452,
+              "p95": 0.649,
+              "p99": 1.446
+            }
+          },
+          "elapsedMs": 1377.312,
+          "cpuMs": 613.418,
+          "cpuPercentOfOneCore": 44.537,
+          "peakRssMiB": 109.781,
+          "finalHeapMiB": 22.079,
+          "loopActiveMs": 690.865,
+          "loopIdleMs": 686.396,
+          "profile": {
+            "samples": 1177,
+            "idlePercent": 59.707,
+            "topActiveFrames": [
+              {
+                "frame": "consoleCall",
+                "ms": 115.487
+              },
+              {
+                "frame": "writeUtf8String",
+                "ms": 58.776
+              },
+              {
+                "frame": "writev",
+                "ms": 40.479
+              },
+              {
+                "frame": "(program)",
+                "ms": 31.683
+              },
+              {
+                "frame": "log · dist/context.js",
+                "ms": 29.315
+              },
+              {
+                "frame": "post · node:inspector",
+                "ms": 16.919
+              },
+              {
+                "frame": "nextTick · node:internal/process/task_queues",
+                "ms": 13.581
+              },
+              {
+                "frame": "writeBuffer",
+                "ms": 12.53
+              },
+              {
+                "frame": "runMicrotasks",
+                "ms": 10.769
+              },
+              {
+                "frame": "onStreamRead · node:internal/stream_base_commons",
+                "ms": 8.017
+              },
+              {
+                "frame": "transaction · dist/stores/postgres/operations.js",
+                "ms": 6.633
+              },
+              {
+                "frame": "BookingError · packages/booking-core/dist/index.js",
+                "ms": 5.874
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

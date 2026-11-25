@@ -48,4 +48,4 @@ HTTP-контракт наведено в [специфікації](spec.md). �
 
 ## Навантажувальні прогони
 
-На чистій ревізії виконайте make load і make profile. Сирі виміри, CPU-профілі й EXPLAIN зберігаються в .local/bench. Порівняння прив'язане до SHA. Публічний TypeScript-контракт бронювання міститься в packages/booking-core.
+На чистій ревізії виконайте make load і make profile. Сирі виміри, CPU-профілі й EXPLAIN зберігаються в .local/bench. Порівняння з прив’язкою до SHA є в [результатах вимірів](evidence/lab05-analysis.md). Публічний TypeScript-контракт бронювання міститься в packages/booking-core.

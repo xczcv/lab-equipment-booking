@@ -1,0 +1,44 @@
+Зібраний API і бібліотека в ревізії
+41a056c8a40fb99a3038b520d0d1930c20502c88
+Скорочений вивід завершеної перевірки Node.js 24
+$ node --version
+v24.22.3
+$ make check
+All matched files use Prettier code style!
+✔ built server answers health over HTTP (17.347417ms)
+ℹ tests 1
+ℹ pass 1
+ℹ fail 0
+$ sh scripts/with-postgres.sh sh -c "TEST_DATABASE_URL=\$DATABASE_URL make test"
+✔ two independent sessions race for a slot and the database allows one active booking (211.078833ms)
+✔ built API finds, creates, replays, cancels and rebooks a slot (171.934792ms)
+✔ built server answers health over HTTP (16.5665ms)
+✔ PostgreSQL HTTP contract, transaction rollback, availability query, and correlated logs (160.675375ms)
+✔ connection failure returns a correlated 503 (4.838458ms)
+✔ Europe/Kyiv availability handles a 23-hour calendar day (62.871125ms)
+✔ allows a future free slot (0.303709ms)
+✔ rejects a future occupied slot (0.050167ms)
+✔ reports a missing slot (0.036875ms)
+✔ rejects a slot that has already started before checking occupancy (0.035042ms)
+✔ rejects a slot at the exact instant it starts (0.035208ms)
+ℹ tests 11
+ℹ pass 11
+ℹ fail 0
+$ make mutation
+All files       | 100.00 |  100.00 |       13 |         0 |          0 |        0 |        0 |
+$ npm audit --omit=dev
+found 0 vulnerabilities
+
+$ make container-check
+Built sha256:3b2172305f27c4b5507aeed2be91481ed49bb1f0456093c956d1f1462cd2b01b with APP_SHA=41a056c8a40fb99a3038b520d0d1930c20502c88
+curl: (52) Empty reply from server
+{"status":"ok"}
+/ready {"error":"storage_unavailable"}
+503
+Applied indexes/bookings_one_active_idx.sql
+Applied indexes/bookings_owner_history_idx.sql
+/ready {"status":"ready"}
+200
+/version {"sha":"41a056c8a40fb99a3038b520d0d1930c20502c88"}
+200
+Docker health status: healthy
