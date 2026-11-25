@@ -1,13 +1,16 @@
 2026-11-24 — локальна перевірка, відокремлений worktree
 86c0307f7c13f7f754c60478c0cb342cf2b25e62 docs: record measured booking performance before and after extraction
-$ git commit-tree (той самий tree, два повідомлення)
+$ base=$(git rev-parse HEAD)
+$ wrong=$(git commit-tree "$base^{tree}" -p "$base" -m 'Deliberately invalid audit fixture')
+$ later=$(git commit-tree "$base^{tree}" -p "$wrong" -m 'test: follow the invalid subject with a valid subject')
+$ git log --reverse --format='%H %s' "$base..$later"
 c8e90e81bd540ecc9af53c8a3578303e22715e1a Deliberately invalid audit fixture
 2473962b660e95a76ba4ea013ed2b9a95a9022bc test: follow the invalid subject with a valid subject
 $ node scripts/check-commits.js 86c0307f7c13f7f754c60478c0cb342cf2b25e62..2473962b660e95a76ba4ea013ed2b9a95a9022bc
 Invalid Conventional Commit: c8e90e8	Deliberately invalid audit fixture
 exit=1
 
-$ printf ... > ci-format-probe.js
+$ printf '%s\n' 'export const ciFormatProbe={enabled:true}' > ci-format-probe.js
 $ git add ci-format-probe.js
 $ git -c core.hooksPath=/dev/null commit -m "test: introduce an intentional CI formatting error"
 [detached HEAD 0cf781a] test: introduce an intentional CI formatting error
@@ -33,6 +36,7 @@ exit=2
 
 $ npm exec -- prettier --write ci-format-probe.js
 ci-format-probe.js 7ms
+$ git add ci-format-probe.js
 $ git commit -m "test: fix the intentional CI formatting error"
 
 > lab-equipment-booking@0.1.0 check

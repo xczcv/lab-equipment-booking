@@ -5,7 +5,7 @@ $ cmp "$(git rev-parse --git-path hooks/pre-push)" scripts/git-hook.sh
 exit=0
 HEAD=4f6e1d209fed15514da0dde2798110a32b9a2ad2
 На stdin hook передано refs/heads/test/ci-format-gate 0cf781ada9a8743fd92a7939878c07646d72a747 refs/heads/test/ci-format-gate 0000000000000000000000000000000000000000
-$ printf ... | "$hook" origin fixture-remote
+$ printf 'refs/heads/test/ci-format-gate %s refs/heads/test/ci-format-gate %040d\n' "$red" 0 | "$hook" origin fixture-remote
 
 > lab-equipment-booking@0.1.0 check
 > npm run format:check && npm run lint && npm run build && npm run test:smoke
