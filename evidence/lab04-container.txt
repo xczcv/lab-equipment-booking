@@ -1,0 +1,37 @@
+$ make container-check
+sh scripts/check-container.sh
+Built sha256:38ad83c9392125db3d2ab91536dd070a659e3d2f1ab4174dc49cbe0dde3ebfc3 with APP_SHA=d8afd93fba5c6bea3b5a7e83a6eddc4de71e4362
+curl: (52) Empty reply from server
+{"status":"ok"}
+/ready {"error":"storage_unavailable"}
+503
+Applied indexes/bookings_one_active_idx.sql
+Applied indexes/bookings_owner_history_idx.sql
+/ready {"status":"ready"}
+200
+/version {"sha":"d8afd93fba5c6bea3b5a7e83a6eddc4de71e4362"}
+200
+Docker health status: healthy
+Applied schema/001-initial.sql
+{"operation":"startup","event":"db.start"}
+{"operation":"startup","durationMs":9.373333000000002,"rowCount":1,"event":"db.result"}
+{"port":3000,"event":"server.listening"}
+{"method":"GET","path":"/health","processId":"eccab48d-3541-443c-939d-73986fd17f0f","initiator":null,"event":"http.request"}
+{"status":200,"durationMs":2.1727079999999432,"processId":"eccab48d-3541-443c-939d-73986fd17f0f","initiator":null,"event":"http.result"}
+{"method":"GET","path":"/ready","processId":"d9a6bbeb-416c-4d29-9633-95d7c8881eff","initiator":null,"event":"http.request"}
+{"operation":"readiness","processId":"d9a6bbeb-416c-4d29-9633-95d7c8881eff","initiator":null,"event":"db.start"}
+{"operation":"readiness","durationMs":2.633958000000007,"rowCount":1,"processId":"d9a6bbeb-416c-4d29-9633-95d7c8881eff","initiator":null,"event":"db.result"}
+{"code":"storage_unavailable","processId":"d9a6bbeb-416c-4d29-9633-95d7c8881eff","initiator":null,"event":"http.error"}
+{"status":503,"durationMs":3.42679099999998,"processId":"d9a6bbeb-416c-4d29-9633-95d7c8881eff","initiator":null,"event":"http.result"}
+{"method":"GET","path":"/ready","processId":"09e730d1-555c-467c-85e8-0d3bea9dc345","initiator":null,"event":"http.request"}
+{"operation":"readiness","processId":"09e730d1-555c-467c-85e8-0d3bea9dc345","initiator":null,"event":"db.start"}
+{"operation":"readiness","durationMs":0.7121250000000146,"rowCount":1,"processId":"09e730d1-555c-467c-85e8-0d3bea9dc345","initiator":null,"event":"db.result"}
+{"status":200,"durationMs":0.9750420000000304,"processId":"09e730d1-555c-467c-85e8-0d3bea9dc345","initiator":null,"event":"http.result"}
+{"method":"GET","path":"/version","processId":"ff07adf1-291c-4871-ae3b-837984eee2b9","initiator":null,"event":"http.request"}
+{"status":200,"durationMs":0.45954200000005585,"processId":"ff07adf1-291c-4871-ae3b-837984eee2b9","initiator":null,"event":"http.result"}
+{"method":"GET","path":"/version","processId":"18ee58f6-ae9a-45d5-abcb-60afc0a6dc2e","initiator":null,"event":"http.request"}
+{"status":200,"durationMs":0.2459999999998672,"processId":"18ee58f6-ae9a-45d5-abcb-60afc0a6dc2e","initiator":null,"event":"http.result"}
+{"method":"GET","path":"/ready","processId":"586213e6-70fb-4675-806d-7e1ff6ffa8a5","initiator":null,"event":"http.request"}
+{"operation":"readiness","processId":"586213e6-70fb-4675-806d-7e1ff6ffa8a5","initiator":null,"event":"db.start"}
+{"operation":"readiness","durationMs":0.7373330000000351,"rowCount":1,"processId":"586213e6-70fb-4675-806d-7e1ff6ffa8a5","initiator":null,"event":"db.result"}
+{"status":200,"durationMs":0.9368340000000899,"processId":"586213e6-70fb-4675-806d-7e1ff6ffa8a5","initiator":null,"event":"http.result"}

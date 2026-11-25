@@ -1,0 +1,10 @@
+ЛР4. Навмисний негативний тест кроку Conventional Commits
+$ git commit-tree HEAD^{tree} -p HEAD -m "Deliberately invalid CI fixture"
+217e9bc3404ce1771e6baff3dd0ce2534e58d3ea Deliberately invalid CI fixture
+$ node scripts/check-commits.js d8afd93fba5c6bea3b5a7e83a6eddc4de71e4362..217e9bc3404ce1771e6baff3dd0ce2534e58d3ea
+Invalid Conventional Commit: 217e9bc	Deliberately invalid CI fixture
+exit=1
+$ node scripts/check-commits.js main..d8afd93fba5c6bea3b5a7e83a6eddc4de71e4362
+Conventional Commits checked: 6
+$ docker run --rm -v "$PWD:/repo:ro" -w /repo rhysd/actionlint:1.7.7
+exit=0
