@@ -1,4 +1,4 @@
-.PHONY: check hooks test mutation container-check
+.PHONY: check hooks test mutation container-check load profile
 
 check:
 	npm run check
@@ -15,3 +15,7 @@ mutation:
 
 container-check:
 	sh scripts/check-container.sh
+
+load profile:
+	npm run build
+	sh scripts/with-postgres.sh node bench/run.js $@
