@@ -1,0 +1,119 @@
+2026-11-24 — локальна перевірка, відокремлений worktree
+86c0307f7c13f7f754c60478c0cb342cf2b25e62 docs: record measured booking performance before and after extraction
+$ git commit-tree (той самий tree, два повідомлення)
+c8e90e81bd540ecc9af53c8a3578303e22715e1a Deliberately invalid audit fixture
+2473962b660e95a76ba4ea013ed2b9a95a9022bc test: follow the invalid subject with a valid subject
+$ node scripts/check-commits.js 86c0307f7c13f7f754c60478c0cb342cf2b25e62..2473962b660e95a76ba4ea013ed2b9a95a9022bc
+Invalid Conventional Commit: c8e90e8	Deliberately invalid audit fixture
+exit=1
+
+$ printf ... > ci-format-probe.js
+$ git add ci-format-probe.js
+$ git -c core.hooksPath=/dev/null commit -m "test: introduce an intentional CI formatting error"
+[detached HEAD 0cf781a] test: introduce an intentional CI formatting error
+ 1 file changed, 1 insertion(+)
+ create mode 100644 ci-format-probe.js
+$ node scripts/check-commits.js 86c0307f7c13f7f754c60478c0cb342cf2b25e62..0cf781ada9a8743fd92a7939878c07646d72a747
+Conventional Commits checked: 1
+$ make check
+npm run check
+
+> lab-equipment-booking@0.1.0 check
+> npm run format:check && npm run lint && npm run build && npm run test:smoke
+
+
+> lab-equipment-booking@0.1.0 format:check
+> prettier --check .
+
+Checking formatting...
+[warn] ci-format-probe.js
+[warn] Code style issues found in the above file. Run Prettier with --write to fix.
+make: *** [check] Error 1
+exit=2
+
+$ npm exec -- prettier --write ci-format-probe.js
+ci-format-probe.js 7ms
+$ git commit -m "test: fix the intentional CI formatting error"
+
+> lab-equipment-booking@0.1.0 check
+> npm run format:check && npm run lint && npm run build && npm run test:smoke
+
+
+> lab-equipment-booking@0.1.0 format:check
+> prettier --check .
+
+Checking formatting...
+All matched files use Prettier code style!
+
+> lab-equipment-booking@0.1.0 lint
+> eslint .
+
+
+> lab-equipment-booking@0.1.0 build
+> npm run build --workspace @lab-equipment/booking-core && tsc -p tsconfig.json
+
+
+> @lab-equipment/booking-core@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> lab-equipment-booking@0.1.0 test:smoke
+> node --test test/health.test.js
+
+{"method":"GET","path":"/health","processId":"96f062d0-f405-42f8-8968-e8ed0cda9c61","initiator":null,"event":"http.request"}
+{"status":200,"durationMs":1.3079579999999993,"processId":"96f062d0-f405-42f8-8968-e8ed0cda9c61","initiator":null,"event":"http.result"}
+✔ built server answers health over HTTP (14.81425ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 98.048417
+[detached HEAD 4f6e1d2] test: fix the intentional CI formatting error
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+0cf781ada9a8743fd92a7939878c07646d72a747 test: introduce an intentional CI formatting error
+4f6e1d209fed15514da0dde2798110a32b9a2ad2 test: fix the intentional CI formatting error
+$ node scripts/check-commits.js 86c0307f7c13f7f754c60478c0cb342cf2b25e62..4f6e1d209fed15514da0dde2798110a32b9a2ad2
+Conventional Commits checked: 2
+$ make check
+npm run check
+
+> lab-equipment-booking@0.1.0 check
+> npm run format:check && npm run lint && npm run build && npm run test:smoke
+
+
+> lab-equipment-booking@0.1.0 format:check
+> prettier --check .
+
+Checking formatting...
+All matched files use Prettier code style!
+
+> lab-equipment-booking@0.1.0 lint
+> eslint .
+
+
+> lab-equipment-booking@0.1.0 build
+> npm run build --workspace @lab-equipment/booking-core && tsc -p tsconfig.json
+
+
+> @lab-equipment/booking-core@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> lab-equipment-booking@0.1.0 test:smoke
+> node --test test/health.test.js
+
+{"method":"GET","path":"/health","processId":"68ac0587-2aaf-4369-8d5b-24b4f5d8a9ab","initiator":null,"event":"http.request"}
+{"status":200,"durationMs":1.2957080000000047,"processId":"68ac0587-2aaf-4369-8d5b-24b4f5d8a9ab","initiator":null,"event":"http.result"}
+✔ built server answers health over HTTP (15.409125ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 95.101167
+exit=0

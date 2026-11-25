@@ -1,0 +1,46 @@
+2026-11-24 — межі локального pre-push
+$ git diff --exit-code lab-01 lab-05 -- scripts/git-hook.sh
+exit=0
+$ cmp "$(git rev-parse --git-path hooks/pre-push)" scripts/git-hook.sh
+exit=0
+HEAD=4f6e1d209fed15514da0dde2798110a32b9a2ad2
+На stdin hook передано refs/heads/test/ci-format-gate 0cf781ada9a8743fd92a7939878c07646d72a747 refs/heads/test/ci-format-gate 0000000000000000000000000000000000000000
+$ printf ... | "$hook" origin fixture-remote
+
+> lab-equipment-booking@0.1.0 check
+> npm run format:check && npm run lint && npm run build && npm run test:smoke
+
+
+> lab-equipment-booking@0.1.0 format:check
+> prettier --check .
+
+Checking formatting...
+All matched files use Prettier code style!
+
+> lab-equipment-booking@0.1.0 lint
+> eslint .
+
+
+> lab-equipment-booking@0.1.0 build
+> npm run build --workspace @lab-equipment/booking-core && tsc -p tsconfig.json
+
+
+> @lab-equipment/booking-core@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> lab-equipment-booking@0.1.0 test:smoke
+> node --test test/health.test.js
+
+{"method":"GET","path":"/health","processId":"2f3ea226-c3a6-4385-aca6-19ee376c6ec0","initiator":null,"event":"http.request"}
+{"status":200,"durationMs":1.2651250000000118,"processId":"2f3ea226-c3a6-4385-aca6-19ee376c6ec0","initiator":null,"event":"http.result"}
+✔ built server answers health over HTTP (12.989208ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 95.551875
+exit=0

@@ -1,0 +1,41 @@
+2026-11-24 — чистий зріз ЛР1
+7ed3a2a7746c011152941c94d272d30f9b9ff180 feat: establish the API skeleton and engineering checks
+$ node --version
+v25.7.0
+$ npm ci --no-audit --no-fund
+
+added 82 packages in 292ms
+$ make check
+npm run check
+
+> lab-equipment-booking@0.1.0 check
+> npm run format:check && npm run lint && npm run build && npm run test:smoke
+
+
+> lab-equipment-booking@0.1.0 format:check
+> prettier --check .
+
+Checking formatting...
+All matched files use Prettier code style!
+
+> lab-equipment-booking@0.1.0 lint
+> eslint .
+
+
+> lab-equipment-booking@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> lab-equipment-booking@0.1.0 test:smoke
+> node --test test/health.test.js
+
+✔ built server answers health over HTTP (13.262083ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 91.98525
+exit=0
