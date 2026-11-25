@@ -7,7 +7,16 @@ import { serveProcess } from './support/process.js';
 test('built API finds, creates, replays, cancels and rebooks a slot', async (t) => {
   const date = '2099-07-02';
   const { url } = await isolatedDatabase(t, date);
-  const request = await serveProcess(t, url);
+  const sha = '0123456789abcdef0123456789abcdef01234567';
+  const request = await serveProcess(t, url, {
+    APP_SHA: sha,
+    RENDER_GIT_COMMIT: sha,
+  });
+  assert.deepEqual(await request('/ready'), {
+    status: 200,
+    body: { status: 'ready' },
+  });
+  assert.deepEqual(await request('/version'), { status: 200, body: { sha } });
   const students = {
     first: { headers: { 'x-user-id': 'student-a' } },
     other: { headers: { 'x-user-id': 'student-b' } },

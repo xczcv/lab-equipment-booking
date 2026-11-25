@@ -1,4 +1,4 @@
-.PHONY: check hooks test mutation
+.PHONY: check hooks test mutation container-check
 
 check:
 	npm run check
@@ -12,3 +12,6 @@ test:
 
 mutation:
 	npx --no-install stryker run
+
+container-check:
+	sh scripts/check-container.sh

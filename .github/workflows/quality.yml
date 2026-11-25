@@ -1,0 +1,73 @@
+name: Quality and staging
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quality-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_USER: booking_test
+          POSTGRES_PASSWORD: booking_test
+          POSTGRES_DB: booking_test
+        ports: ['5432/tcp']
+        options: >-
+          --health-cmd "pg_isready -h 127.0.0.1 -U booking_test -d booking_test"
+          --health-interval 2s
+          --health-timeout 3s
+          --health-retries 15
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - name: Conventional Commits
+        env:
+          PR_BASE: ${{ github.event.pull_request.base.sha }}
+          PR_HEAD: ${{ github.event.pull_request.head.sha }}
+          PUSH_BASE: ${{ github.event.before }}
+        run: |
+          if [ -n "$PR_BASE" ]; then
+            node scripts/check-commits.js "$PR_BASE..$PR_HEAD"
+          elif [ -n "$PUSH_BASE" ] && git cat-file -e "$PUSH_BASE^{commit}" 2>/dev/null; then
+            node scripts/check-commits.js "$PUSH_BASE..$GITHUB_SHA"
+          else
+            node scripts/check-commits.js "$GITHUB_SHA"
+          fi
+      - run: make check
+      - run: make test
+        env:
+          TEST_DATABASE_URL: postgresql://booking_test:booking_test@127.0.0.1:${{ job.services.postgres.ports['5432'] }}/booking_test
+      - run: docker build --build-arg "APP_SHA=$GITHUB_SHA" .
+
+  staging:
+    if: github.event_name == 'push'
+    needs: quality
+    runs-on: ubuntu-latest
+    environment: staging
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v5
+      - name: Deploy exact commit and verify readiness
+        env:
+          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+          RENDER_SERVICE_ID: ${{ vars.RENDER_SERVICE_ID }}
+          STAGING_URL: ${{ vars.STAGING_URL }}
+        run: bash scripts/deploy-staging.sh

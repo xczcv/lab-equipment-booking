@@ -7,9 +7,18 @@ import {
   slotDate,
 } from './input.js';
 
-export function routes({ catalog, bookings }) {
+export function routes({ catalog, bookings, ready, sha }) {
   return [
     ['GET', /^\/health$/, () => ({ status: 'ok' })],
+    [
+      'GET',
+      /^\/ready$/,
+      async () => {
+        if (!(await ready())) throw new Fault('storage_unavailable');
+        return { status: 'ready' };
+      },
+    ],
+    ['GET', /^\/version$/, () => ({ sha })],
     ['GET', /^\/equipment$/, () => catalog.list()],
     [
       'GET',

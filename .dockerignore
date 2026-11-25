@@ -1,0 +1,10 @@
+*
+!package.json
+!package-lock.json
+!tsconfig.json
+!src/
+!src/**
+!db/
+!db/**
+!scripts/
+!scripts/container-start.sh

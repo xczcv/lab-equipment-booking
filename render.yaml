@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: lab-equipment-booking-staging
+    runtime: docker
+    plan: starter
+    region: frankfurt
+    branch: main
+    autoDeployTrigger: 'off'
+    healthCheckPath: /ready
+    preDeployCommand: node dist/maintenance/migrate.js all
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: lab-equipment-booking-staging-db
+          property: connectionString
+
+databases:
+  - name: lab-equipment-booking-staging-db
+    plan: basic-256mb
+    region: frankfurt
+    postgresMajorVersion: '17'
+    ipAllowList: []

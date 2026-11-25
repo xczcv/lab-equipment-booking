@@ -9,14 +9,22 @@ import { matchRoute, routes } from './routes.js';
 function send(response, status, body) {
   response.writeHead(status, {
     'content-type': 'application/json; charset=utf-8',
+    'cache-control': 'no-store',
   });
   response.end(JSON.stringify(body));
 }
 
-export function createApp({ store, clock = Date.now } = {}) {
+export function createApp({
+  store,
+  clock = Date.now,
+  ready = () => false,
+  sha = 'dev',
+} = {}) {
   const entries = routes({
     catalog: createCatalogService(store, clock),
     bookings: createBookingService(store, clock),
+    ready,
+    sha,
   });
   return createServer({ requestTimeout: 15_000 }, (request, response) => {
     runRequest(initiatorHeader(request.headers['x-user-id']), async () => {

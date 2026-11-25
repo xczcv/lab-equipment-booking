@@ -41,3 +41,7 @@ HTTP-контракт наведено в [специфікації](spec.md). �
 ## Тести
 
 Команда make test збирає застосунок, піднімає одноразову PostgreSQL у Docker або використовує окрему БД із TEST_DATABASE_URL, запускає smoke, unit, integration та E2E. Команда make mutation запускає Stryker для правила доступності. Звіти поточного прогону з’являються в reports/mutation.
+
+## CI та staging
+
+Локальна перевірка контейнера — make container-check. Потребує Docker та curl. Зовнішнє налаштування описано в [інструкції для GitHub і Render](docs/staging.md).

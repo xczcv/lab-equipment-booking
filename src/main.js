@@ -2,6 +2,7 @@ import { log } from './context.js';
 import { createApp } from './http/server.js';
 import { dbQuery } from './stores/postgres/operations.js';
 import { createPool } from './stores/postgres/pool.js';
+import { databaseReady } from './stores/postgres/readiness.js';
 import { createPostgresStore } from './stores/postgres/store.js';
 
 const port = Number(process.env.PORT ?? 3000);
@@ -12,7 +13,11 @@ try {
   await pool.end();
   throw error;
 }
-const server = createApp({ store: createPostgresStore(pool) });
+const server = createApp({
+  store: createPostgresStore(pool),
+  ready: () => databaseReady(pool),
+  sha: process.env.RENDER_GIT_COMMIT ?? process.env.APP_SHA ?? 'dev',
+});
 server.listen(port, '0.0.0.0', () =>
   log('server.listening', { port: server.address().port }),
 );
