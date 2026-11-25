@@ -1,6 +1,7 @@
+import { createBookingService } from '@lab-equipment/booking-core';
 import { createServer } from 'node:http';
 import { log, requestContext, runRequest } from '../context.js';
-import { createBookingService } from '../services/bookings.js';
+
 import { createCatalogService } from '../services/catalog.js';
 import { httpError } from './errors.js';
 import { initiatorHeader } from './input.js';
@@ -22,7 +23,12 @@ export function createApp({
 } = {}) {
   const entries = routes({
     catalog: createCatalogService(store, clock),
-    bookings: createBookingService(store, clock),
+    bookings: createBookingService({
+      store,
+      clock,
+      initiator: () => requestContext().initiator,
+      onEvent: ({ type, ...attributes }) => log(type, attributes),
+    }),
     ready,
     sha,
   });

@@ -45,3 +45,7 @@ HTTP-контракт наведено в [специфікації](spec.md). �
 ## CI та staging
 
 Локальна перевірка контейнера — make container-check. Потребує Docker та curl. Зовнішнє налаштування описано в [інструкції для GitHub і Render](docs/staging.md).
+
+## Навантажувальні прогони
+
+На чистій ревізії виконайте make load і make profile. Сирі виміри, CPU-профілі й EXPLAIN зберігаються в .local/bench. Порівняння прив'язане до SHA. Публічний TypeScript-контракт бронювання міститься в packages/booking-core.

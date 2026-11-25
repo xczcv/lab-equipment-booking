@@ -3,11 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "workspaces": [
+    "packages/booking-core"
+  ],
   "engines": {
     "node": ">=24"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "npm run build --workspace @lab-equipment/booking-core && tsc -p tsconfig.json",
     "start": "node dist/main.js",
     "db:migrate": "node src/maintenance/migrate.js",
     "db:seed": "node src/maintenance/seed.js",
@@ -26,6 +29,7 @@
     "typescript": "~5.9.3"
   },
   "dependencies": {
+    "@lab-equipment/booking-core": "0.1.0",
     "pg": "^8.23.1"
   }
 }

@@ -1,8 +1,11 @@
 FROM node:24-bookworm-slim AS build
 WORKDIR /app
 COPY package.json package-lock.json ./
+COPY packages/booking-core/package.json ./packages/booking-core/
 RUN npm ci
 COPY tsconfig.json ./
+COPY packages/booking-core/tsconfig.json ./packages/booking-core/
+COPY packages/booking-core/src ./packages/booking-core/src
 COPY src ./src
 RUN npm run build && npm prune --omit=dev
 
@@ -13,6 +16,8 @@ ENV NODE_ENV=production APP_SHA=$APP_SHA PORT=3000
 COPY --from=build --chown=node:node /app/node_modules ./node_modules
 COPY --from=build --chown=node:node /app/dist ./dist
 COPY --chown=node:node package.json ./
+COPY --from=build --chown=node:node /app/packages/booking-core/package.json ./packages/booking-core/
+COPY --from=build --chown=node:node /app/packages/booking-core/dist ./packages/booking-core/dist
 COPY --chown=node:node db ./db
 COPY --chown=node:node scripts/container-start.sh ./scripts/
 USER node

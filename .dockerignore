@@ -8,3 +8,9 @@
 !db/**
 !scripts/
 !scripts/container-start.sh
+!packages/
+!packages/booking-core/
+!packages/booking-core/package.json
+!packages/booking-core/tsconfig.json
+!packages/booking-core/src/
+!packages/booking-core/src/**

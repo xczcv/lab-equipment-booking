@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { slotIssue } from '../../src/domain/slot-policy.js';
+import { slotIssue } from '../../packages/booking-core/src/slot-policy.ts';
 
 test('allows a future free slot', () => {
   assert.equal(slotIssue({ startsAt: 101, occupied: false }, 100), null);

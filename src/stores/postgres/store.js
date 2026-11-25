@@ -1,4 +1,3 @@
-import { Fault } from '../../domain/fault.js';
 import { availableSlotsSql } from './catalog-sql.js';
 import { dbQuery, transaction } from './operations.js';
 
@@ -99,8 +98,7 @@ export function createPostgresStore(pool) {
             'SELECT slot_id, response FROM booking_receipts WHERE user_id = $1 AND request_key = $2',
             [userId, key],
           );
-          if (receipt.rows[0].slot_id !== slotId)
-            throw new Fault('key_conflict');
+          if (receipt.rows[0].slot_id !== slotId) return { keyConflict: true };
           return { booking: receipt.rows[0].response, replay: true };
         }
 

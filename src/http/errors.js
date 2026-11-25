@@ -1,3 +1,4 @@
+import { BookingError } from '@lab-equipment/booking-core';
 import { Fault } from '../domain/fault.js';
 
 const statuses = {
@@ -19,6 +20,9 @@ const statuses = {
 };
 
 export function httpError(error) {
-  const code = error instanceof Fault ? error.code : 'internal_error';
+  const code =
+    error instanceof Fault || error instanceof BookingError
+      ? error.code
+      : 'internal_error';
   return { code, status: statuses[code] ?? 500 };
 }
