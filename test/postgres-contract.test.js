@@ -154,3 +154,25 @@ test('connection failure returns a correlated 503', async (t) => {
   assert.deepEqual(response.body, { error: 'storage_unavailable' });
   assert.ok(response.processId);
 });
+
+test('Europe/Kyiv availability handles a 23-hour calendar day', async (t) => {
+  const { pool } = await isolatedDatabase(t, '2031-03-28');
+  await pool.query(`
+    INSERT INTO slots VALUES
+      (4, 1, '2031-03-29T21:59Z', '2031-03-29T22:14Z'),
+      (5, 1, '2031-03-29T22:00Z', '2031-03-29T22:15Z'),
+      (6, 1, '2031-03-30T20:59Z', '2031-03-30T21:14Z'),
+      (7, 1, '2031-03-30T21:00Z', '2031-03-30T21:15Z')
+  `);
+  t.mock.method(console, 'log', () => {});
+  const request = await serve(t, pool, () =>
+    Date.parse('2031-03-29T00:00:00Z'),
+  );
+  const found = await request('/equipment/1/slots?date=2031-03-30');
+  assert.deepEqual(
+    found.body.map(({ id }) => id),
+    [5, 6],
+  );
+  const empty = await request('/equipment/2/slots?date=2031-03-30');
+  assert.deepEqual([empty.status, empty.body], [200, []]);
+});

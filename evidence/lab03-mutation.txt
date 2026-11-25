@@ -1,0 +1,21 @@
+$ make mutation
+npx --no-install stryker run
+21:20:09 (37195) INFO ProjectReader Found 1 of 74 file(s) to be mutated.
+21:20:09 (37195) INFO Instrumenter Instrumented 1 source file(s) with 13 mutant(s)
+21:20:09 (37195) INFO ConcurrencyTokenProvider Creating 2 test runner process(es).
+21:20:09 (37195) INFO DryRunExecutor Starting initial test run (command test runner with "off" coverage analysis). This may take a while.
+21:20:09 (37195) INFO DryRunExecutor Initial test run succeeded. Ran 1 tests in 0 seconds (net 113 ms, overhead 1 ms).
+
+All tests
+  ✓ All tests (killed 13)
+
+Ran 1.00 tests per mutant on average.
+----------------|------------------|----------|-----------|------------|----------|----------|
+                | % Mutation score |          |           |            |          |          |
+File            |  total | covered | # killed | # timeout | # survived | # no cov | # errors |
+----------------|--------|---------|----------|-----------|------------|----------|----------|
+All files       | 100.00 |  100.00 |       13 |         0 |          0 |        0 |        0 |
+ slot-policy.js | 100.00 |  100.00 |       13 |         0 |          0 |        0 |        0 |
+----------------|--------|---------|----------|-----------|------------|----------|----------|
+21:20:10 (37195) INFO JsonReporter Your report can be found at: reports/mutation/mutation.json
+21:20:10 (37195) INFO MutationTestExecutor Done in 1 second.

@@ -12,3 +12,21 @@ test('rejects a future occupied slot', () => {
     'slot_occupied',
   );
 });
+
+test('reports a missing slot', () => {
+  assert.equal(slotIssue(null, 100), 'slot_not_found');
+});
+
+test('rejects a slot that has already started before checking occupancy', () => {
+  assert.equal(
+    slotIssue({ startsAt: 99, occupied: true }, 100),
+    'slot_started',
+  );
+});
+
+test('rejects a slot at the exact instant it starts', () => {
+  assert.equal(
+    slotIssue({ startsAt: 100, occupied: false }, 100),
+    'slot_started',
+  );
+});
